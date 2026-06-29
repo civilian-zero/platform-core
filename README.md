@@ -15,7 +15,20 @@ Monorepo for the platform domain model, API contracts, and services.
 ```
 platform-core/
   README.md
+  CLAUDE.md
+  .ai/prompts/
+  .cursor/rules/
   packages/
+    kernel/
+      src/
+        tenant/
+        identity/
+        permissions/
+        audit/
+        events/
+        errors/
+        time/
+        money/
     domain/
       src/
         user/
@@ -28,15 +41,32 @@ platform-core/
         conversation/
         referral/
         affiliate/
-        event/
+        calendar-event/
+        reputation-signal/
     api-contracts/
       src/
-        commands/
-        queries/
-        events/
         schemas/
+          shared/
+          identity/
+          relationships/
+          communities/
+          commerce/
+          messaging/
+          referrals/
+          notifications/
+        commands/
+          identity/
+          ...
+        queries/
+          identity/
+          ...
+        events/
+          identity/
+          ...
     services/
       identity/
+        src/
+        tests/
       relationships/
       communities/
       commerce/
@@ -46,7 +76,12 @@ platform-core/
   docs/
     architecture.md
     domain-model.md
+    adr/
   tests/
+    integration/
+    contract/
+    permissions/
+    fixtures/
 ```
 
 ## Branch protection

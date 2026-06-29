@@ -1,0 +1,63 @@
+---
+description: Platform architecture rules for platform-core
+alwaysApply: true
+---
+
+# Platform Rules
+
+You are working in `platform-core`, the reusable infrastructure layer for a multi-tenant relationship-commerce platform.
+
+Famm is the first application on this platform. It is not the platform itself.
+
+Before architecture, schema, API, or feature decisions, read:
+
+`platform-docs/docs/constitution/PLATFORM_CONSTITUTION.md`
+
+## Layer classification
+
+Classify every change as one of:
+
+- Platform Core
+- Application Layer
+- User Experience Layer
+
+Platform Core belongs in this repo. Famm-specific logic belongs in `famm-app`.
+
+## Platform primitives
+
+Prefer these primitives before creating new entities:
+
+- User
+- Organization
+- Community
+- Relationship
+- Activity
+- Offer
+- Transaction
+- Conversation
+- Referral
+- Affiliate
+- CalendarEvent
+- ReputationSignal
+
+## Required rules
+
+1. Do not introduce fitness-specific concepts (trainer, client, workout, gym, session, package, membership) unless an ADR explicitly approves it.
+2. All tenant-sensitive models must include tenant ownership (`organization_id` or `tenant_id`).
+3. All major business actions must emit domain events.
+4. APIs must represent reusable platform capabilities, not screen-specific workflows.
+5. If a change only benefits Famm, implement it in `famm-app` instead.
+
+## Review prompts
+
+Before changing architecture, run `.ai/prompts/platform-review.md`.
+
+Before changing data models, run `.ai/prompts/data-model-review.md`.
+
+Before opening a pull request, run `.ai/prompts/pr-review.md`.
+
+## Naming
+
+- Use `calendar-event` for the scheduled occurrence primitive folder to avoid confusion with domain events.
+- Use industry-neutral names in platform-core (`provider`, `customer`, `activity`, `offer`).
+- Application labels (e.g. "trainer") are allowed only at the app/UI layer.
