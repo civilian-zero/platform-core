@@ -1,0 +1,32 @@
+name: Apply branch protection
+
+on:
+  workflow_dispatch:
+
+permissions:
+  administration: write
+  contents: read
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure merge settings
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api \
+            --method PATCH \
+            repos/${{ github.repository }} \
+            --input - <<< '{"allow_merge_commit":false,"allow_squash_merge":true,"allow_rebase_merge":true}'
+
+      - name: Apply main branch protection ruleset
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api \
+            --method POST \
+            repos/${{ github.repository }}/rulesets \
+            --input .github/rulesets/main-protection.json
