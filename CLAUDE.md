@@ -20,7 +20,7 @@ You must follow these rules:
 - Conversation
 - Referral
 - Affiliate
-- Event
+- Event (folder: calendar-event)
 - ReputationSignal
 
 3. All tenant-sensitive models must include tenant ownership.
